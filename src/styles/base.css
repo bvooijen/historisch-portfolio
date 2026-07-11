@@ -1,0 +1,125 @@
+/* Basis: reset, typografie, focus, toegankelijkheid */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-verhaal);
+  font-size: var(--maat-lopend);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-verhaal);
+  font-weight: 600;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--archiefblauw-licht);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--goud);
+}
+
+:focus-visible {
+  outline: 2px solid var(--goud);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--marine);
+  color: var(--perkament);
+}
+
+/* typewriter-eyebrow — spaarzaam, alleen als label (§4) */
+.eyebrow {
+  font-family: var(--font-typewriter);
+  font-size: var(--maat-eyebrow);
+  letter-spacing: var(--spatie-eyebrow);
+  text-transform: uppercase;
+  color: var(--goud);
+}
+
+.eyebrow--rood {
+  color: var(--rood-tekst);
+}
+
+.visueel-verborgen {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--ruimte-3);
+  z-index: 100;
+  padding: var(--ruimte-2) var(--ruimte-3);
+  background: var(--goud);
+  color: var(--inkt);
+  font-family: var(--font-ui);
+}
+
+.skip-link:focus {
+  top: var(--ruimte-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

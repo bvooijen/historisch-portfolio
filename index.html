@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ben van Ooijen — docent geschiedenis · De reis van de historicus</title>
+  <meta name="description" content="Portfolio van Ben van Ooijen, eerstegraads docent geschiedenis in Rotterdam. Reis door zes historische stations — of sla de reis over voor het zakelijke overzicht." />
+  <meta property="og:title" content="Ben van Ooijen — docent geschiedenis" />
+  <meta property="og:description" content="De reis van de historicus: een portfolio in zes stations. Waar in de tijd ben je?" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://benvanooijen.nl/" />
+  <meta property="og:image" content="https://benvanooijen.nl/img/og-ben-van-ooijen.jpg" />
+  <link rel="canonical" href="https://benvanooijen.nl/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" as="image" fetchpriority="high"
+        imagesrcset="/img/landing-vroom-1599-800.webp 800w, /img/landing-vroom-1599-1200.webp 1200w, /img/landing-vroom-1599.webp 1600w"
+        imagesizes="100vw" />
+</head>
+<body>
+  <a class="skip-link" href="#hoofdinhoud">Direct naar inhoud</a>
+
+  <header class="site-kop">
+    <a class="site-kop__naam" href="/">
+      <img class="site-kop__avatar" src="/img/avatar-ben.jpg" alt="" width="36" height="36" />
+      <span>Ben van Ooijen</span>
+    </a>
+    <nav class="site-kop__tijdlijn" aria-label="Reis door de stations" data-tijdlijn></nav>
+    <a class="site-kop__overslaan" href="/overzicht/">Sla de reis over <span aria-hidden="true">→</span></a>
+  </header>
+
+  <main id="hoofdinhoud">
+    <!-- Landing: de EraGuessr-opening -->
+    <section class="landing" data-landing aria-labelledby="landing-vraag">
+      <img class="landing__beeld" src="/img/landing-vroom-1599.webp"
+           srcset="/img/landing-vroom-1599-800.webp 800w, /img/landing-vroom-1599-1200.webp 1200w, /img/landing-vroom-1599.webp 1600w"
+           sizes="100vw" width="1600" height="738"
+           alt="Schilderij van Hendrick Cornelisz. Vroom uit 1599: vier zeilschepen van de tweede expeditie naar Oost-Indië keren onder vol tuig terug op het IJ voor Amsterdam, omringd door sloepen vol toeschouwers."
+           fetchpriority="high" />
+      <div class="landing__inhoud">
+        <p class="eyebrow">De reis van de historicus</p>
+        <h1 id="landing-vraag" class="landing__vraag">Waar in de tijd ben je?</h1>
+        <p class="landing__toelichting">Eén beeld, één gok. Kies een jaartal op de tijdlijn — en de reis begint.</p>
+
+        <div class="landing__schuifblok jaarschuif">
+          <label class="visueel-verborgen" for="landing-schuif">Kies een jaartal tussen 1400 en 2026</label>
+          <output class="jaarschuif__jaar" for="landing-schuif" data-landing-jaar>1713</output>
+          <input class="jaarschuif__invoer" type="range" id="landing-schuif"
+                 min="1400" max="2026" step="1" value="1713" data-landing-schuif />
+          <div class="jaarschuif__schaal" aria-hidden="true"><span>1400</span><span>2026</span></div>
+          <button class="knop knop--omtrek" type="button" data-landing-gok>Dit is mijn gok</button>
+        </div>
+
+        <div class="landing__reactie" data-landing-reactie aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- De zes stations: shells, per station ingericht tijdens de bouw -->
+    <div class="stations">
+      <section class="station" id="station-oudheid" aria-labelledby="kop-oudheid">
+        <header class="station__kop">
+          <p class="eyebrow">Station 1 van 6 — De Oudheid · 1996–2002</p>
+          <h2 id="kop-oudheid">De Oorsprong</h2>
+        </header>
+
+        <div class="station__inhoud">
+          <div class="station__verhaal">
+            <p>Elke reis heeft een vertrekpunt. Het mijne ligt op het Gemeentelijk Gymnasium Hilversum (1996–2002), tussen bètaboeken en Griekse rijtjes: profiel natuur &amp; techniek, met geschiedenis en Grieks als extra vakken. Kiezen tussen exact en verleden is me nooit gelukt.</p>
+            <p>Die dubbele blik bleek later geen spagaat, maar een methode: vragen stellen als een wetenschapper, lezen als een filoloog. En bij de Grieken begon dat met één woord.</p>
+          </div>
+          <figure class="station__figuur">
+            <img src="/img/station-oudheid-amfora.webp" loading="lazy" width="1200" height="1500"
+                 alt="Roodfigurige terracotta amfora met een jonge zanger die kithara speelt, toegeschreven aan de Berlin Painter, Athene, ca. 490 v.Chr." />
+            <figcaption>Berlin Painter, amfora met kitharazanger, ca. 490 v.Chr. — The Met, Open Access (CC0)</figcaption>
+          </figure>
+        </div>
+
+        <div class="puzzel" data-puzzel-oudheid>
+          <p class="eyebrow eyebrow--rood">Puzzel 1 — Ontcijfer het woord</p>
+          <p class="puzzel__opdracht">Dit Griekse woord is de oorsprong van het vak. Schuif per letter naar de juiste Latijnse omzetting.</p>
+          <div class="puzzel__interactie" data-oudheid-schuiven>
+            <noscript><p>Deze puzzel heeft JavaScript nodig — het antwoord verklappen we niet, maar het vak heet er wel naar.</p></noscript>
+          </div>
+        </div>
+
+        <div class="ontgrendeling" data-unlock-oudheid></div>
+      </section>
+
+      <section class="station" id="station-ontdekkers" aria-labelledby="kop-ontdekkers">
+        <header class="station__kop">
+          <p class="eyebrow">Station 2 van 6 — De Tijd van Ontdekkers · 2003–2010</p>
+          <h2 id="kop-ontdekkers">Amsterdam</h2>
+        </header>
+
+        <div class="station__verhaal station__verhaal--breed">
+          <p>In 2003 begon ik aan de Universiteit van Amsterdam aan de bachelor geschiedenis (2003–2010) — en stak meteen over: major American Studies, minor English Proficiency. Zoals de kooplieden op de kaarten van deze tijd de oceaan opzochten, zocht ik mijn onderwerp aan de overkant.</p>
+          <p>Die oversteek werd de rode draad: Amerikaanse geschiedenis, gelezen, geschreven en bediscussieerd in het Engels. Wie nu mijn TTO-lessen binnenloopt, hoort waar die basis ligt.</p>
+        </div>
+
+        <div class="puzzel" data-puzzel-ontdekkers>
+          <p class="eyebrow eyebrow--rood">Puzzel 2 — Waar in de tijd is deze kaart?</p>
+          <p class="puzzel__opdracht">Een stad die je kent onder een andere naam. Welk jaar toont deze kaart? Een marge van 25 jaar telt als raak.</p>
+          <figure class="puzzel__kaart">
+            <img src="/img/station-ontdekkers-castello.webp" loading="lazy" width="1600" height="1200"
+                 alt="Vogelvluchtplattegrond van een kleine ommuurde handelsstad op de zuidpunt van een eiland: een fort met vier bastions, Nederlandse gevelhuizen, tuinen, een gracht dwars door de stad en een houten wal aan de landzijde." />
+            <figcaption class="puzzel__kaartbron" data-ontdekkers-bron aria-live="polite"></figcaption>
+          </figure>
+          <div class="puzzel__interactie jaarschuif" data-ontdekkers-schuif>
+            <label class="visueel-verborgen" for="ontdekkers-schuif">Kies een jaartal tussen 1492 en 1800</label>
+            <output class="jaarschuif__jaar" for="ontdekkers-schuif" data-ontdekkers-jaar>1646</output>
+            <input class="jaarschuif__invoer" type="range" id="ontdekkers-schuif"
+                   min="1492" max="1800" step="1" value="1646" data-ontdekkers-invoer />
+            <div class="jaarschuif__schaal" aria-hidden="true"><span>1492</span><span>1800</span></div>
+            <p class="puzzel__melding" data-ontdekkers-melding aria-live="polite"></p>
+            <button class="knop knop--rood" type="button" data-ontdekkers-gok>Dit is mijn gok</button>
+          </div>
+        </div>
+
+        <div class="ontgrendeling" data-unlock-ontdekkers></div>
+      </section>
+
+      <section class="station" id="station-netwerk" aria-labelledby="kop-netwerk">
+        <header class="station__kop">
+          <p class="eyebrow">Station 3 van 6 — De Tijd van Telegraaf en Telefoon · 2010–2018</p>
+          <h2 id="kop-netwerk">Het Netwerk</h2>
+        </header>
+
+        <div class="station__inhoud">
+          <div class="station__verhaal">
+            <p>Van 2010 tot 2018 werkte ik op de communicatieafdelingen van Ziggo en Tele2/T-Mobile — de telefoonnetten van nu. Negen jaar lang complexe boodschappen terugbrengen tot de kern, helder schrijven onder deadline, schakelen in teams vol stakeholders.</p>
+            <p>Geen omweg, maar een leerschool — precies de vaardigheden die een sectie binnenhaalt. En begin 2019 kwam het scharnierpunt. Er tikte één woord over de lijn.</p>
+          </div>
+          <figure class="station__figuur">
+            <img src="/img/station-netwerk-telegraaf.webp" loading="lazy" width="1536" height="1109"
+                 alt="Twee telegrafistes aan een tafel met Barclay-telegraaftoestellen, één houdt de papierstrook met ontvangen tekens vast; foto uit 1908." />
+            <figcaption>Barclay-telegraaftoestellen met telegrafistes, 1908 — Library of Congress</figcaption>
+          </figure>
+        </div>
+
+        <div class="puzzel" data-puzzel-netwerk>
+          <p class="eyebrow eyebrow--rood">Puzzel 3 — Het bericht op de lijn</p>
+          <p class="puzzel__opdracht">Decodeer de vijf letters. Luister, of lees de tekens — de sleutel ligt ernaast.</p>
+          <div class="puzzel__interactie" data-netwerk-interactie>
+            <noscript><p>Deze puzzel heeft JavaScript nodig. Het bericht was hoe dan ook: een keuze.</p></noscript>
+          </div>
+        </div>
+
+        <div class="ontgrendeling" data-unlock-netwerk></div>
+      </section>
+
+      <section class="station" id="station-master" aria-labelledby="kop-master">
+        <header class="station__kop">
+          <p class="eyebrow">Station 4 van 6 — De Tijd van Televisie en Computer · 2019–2020</p>
+          <h2 id="kop-master">De Master</h2>
+        </header>
+
+        <div class="station__inhoud">
+          <div class="station__verhaal">
+            <p>Terug naar de universiteit: WO-master geschiedenis (American Studies) aan de UvA, 2019–2020 — parallel aan de educatieve module van het ICLON in Leiden (tweedegraads bevoegdheid, stage op het Wolfert Tweetalig). Overdag voor de klas, 's avonds in de archieven van 1970.</p>
+            <p>Mijn thesis: <em lang="en">President Richard Nixon and the founding of the Environmental Protection Agency in 1970</em>. De Republikein die het milieuagentschap oprichtte — geen heilige, wel een paradox. Precies het soort raadsel waarvoor je bronnen nodig hebt. Probeer het zelf:</p>
+          </div>
+          <figure class="station__figuur">
+            <img src="/img/station-master-smog.webp" loading="lazy" width="1600" height="1082"
+                 alt="De George Washington Bridge in dichte smog boven de Hudson, gezien richting New Jersey; Documerica-foto van Chester Higgins uit 1973." />
+            <figcaption>Chester Higgins, George Washington Bridge in smog, 1973 — Documerica/EPA, US National Archives</figcaption>
+          </figure>
+        </div>
+
+        <div class="puzzel" data-puzzel-master>
+          <p class="eyebrow eyebrow--rood">Puzzel 4 — Lees als een historicus</p>
+          <p class="puzzel__opdracht">Eén fragment, één vraag — een voorproefje van hoe mijn leerlingen bronnen leren lezen.</p>
+
+          <blockquote class="bron" lang="en">
+            <p class="eyebrow bron__label">Document — Special message to the Congress · 9 juli 1970</p>
+            <p class="bron__citaat">"Our national government today is not structured to make a coordinated attack on the pollutants which debase the air we breathe, the water we drink, and the land that grows our food. (…) It also would be an important first step toward reorganizing the Federal Government's environmental efforts."</p>
+            <footer class="bron__toeschrijving">— Richard Nixon, boodschap aan het Congres bij Reorganization Plan No. 3 (de oprichting van de EPA), 9 juli 1970</footer>
+          </blockquote>
+
+          <div class="puzzel__interactie" data-master-vraag>
+            <noscript><p>Deze bronnenoefening heeft JavaScript nodig.</p></noscript>
+          </div>
+        </div>
+
+        <div class="ontgrendeling" data-unlock-master></div>
+      </section>
+
+      <section class="station" id="station-klas" aria-labelledby="kop-klas">
+        <header class="station__kop">
+          <p class="eyebrow">Station 5 van 6 — De Eenentwintigste Eeuw · 2019–heden</p>
+          <h2 id="kop-klas">De Revolutie in de Klas</h2>
+        </header>
+
+        <div class="station__verhaal station__verhaal--breed">
+          <p>Sinds augustus 2019 ben ik docent geschiedenis op Portus Groene Hart in Barendrecht: TTO-docent op mavo, havo en vwo, inclusief examenklassen, en mentor. In 2023–2024 haalde ik mijn eerstegraads bevoegdheid (WO-master, ICLON, Universiteit Leiden). Ik werk met Bricks History, Feniks en Forum — en bouw daaromheen mijn eigen materiaal: complete lessenseries, toetsen, gameshows en digitale leeromgevingen.</p>
+          <p>Een greep: een lessenserie Koude Oorlog voor 3 havo TTO, een curriculum rond Harari's <em>Nexus</em> verweven met de HC Duitsland (5/6 vwo), Domein D democratie &amp; rechtsstaat voor 4 havo, en HC-examentraining. Alles activerende didactiek, historische vaardigheden geïntegreerd. Maar praten over didactiek is zilver — hieronder ervaar je het zelf. Tot hier was de reis vertelling; dit station is demonstratie.</p>
+        </div>
+
+        <div class="schermen" role="group" aria-label="Screenshots van eigen lestools">
+          <figure class="browserframe">
+            <div class="browserframe__balk" aria-hidden="true"><i></i><i></i><i></i></div>
+            <img src="/img/scherm-escaperoom.webp" loading="lazy" width="896" height="984"
+                 alt="Screenshot van de digitale escape room De Breuk met Moskou: een donkere interface met een Sovjet-verklaring uit 1969 als documentkaart en twee puzzels met sleep- en codevelden." />
+            <figcaption>Digitale escape room <em>De Breuk met Moskou</em> — vijf kamers vol bronnen en puzzels (bovenbouw)</figcaption>
+          </figure>
+          <figure class="browserframe">
+            <div class="browserframe__balk" aria-hidden="true"><i></i><i></i><i></i></div>
+            <img src="/img/scherm-revealtabel.webp" loading="lazy" width="1389" height="873"
+                 alt="Screenshot van een digitale werkvorm in het Engels: een vergelijkingstabel tussen liberalisme en confessionalisme waarin rijen één voor één onthuld worden nadat duo's overlegd hebben." />
+            <figcaption>Reveal-tabel voor TTO: eerst overleggen in duo's, dan rij voor rij onthullen</figcaption>
+          </figure>
+          <figure class="browserframe">
+            <div class="browserframe__balk" aria-hidden="true"><i></i><i></i><i></i></div>
+            <img src="/img/scherm-coldcase.webp" loading="lazy" width="1400" height="726"
+                 alt="Screenshot van de werkvorm Cold Case: een dossieromslag in perkamentstijl over de val van het Chinese Keizerrijk in 1912, met een missiekaart en onderzoeksinstructies." />
+            <figcaption>Cold Case <em>De Moord op het Chinese Keizerrijk</em> — bronnenonderzoek als rechercheklus</figcaption>
+          </figure>
+        </div>
+
+        <!-- Demo 1: de volwaardige bronnenoefening — dit ís het portfolio -->
+        <div class="puzzel" data-demo-bron>
+          <p class="eyebrow eyebrow--rood">Demo 1 — Bronnenoefening, zoals leerlingen die krijgen</p>
+          <p class="puzzel__opdracht">Eén affiche, drie vragen: motief, betrouwbaarheid, representativiteit. Elk antwoord krijgt feedback — ook de goede.</p>
+
+          <div class="demo-bron__indeling">
+            <figure class="demo-bron__poster">
+              <img src="/img/station-klas-marshallposter.webp" loading="lazy" width="714" height="976"
+                   alt="Kleurenaffiche uit 1950: een molen waarvan de wieken uit Europese vlaggen bestaan, met de tekst 'Whatever the weather, we only reach welfare together'." />
+              <figcaption>E. Spreekmeester, <em>Whatever the weather, we only reach welfare together</em> (1950), Marshallplan-postercampagne — US National Archives</figcaption>
+            </figure>
+            <div class="demo-bron__vragen" data-demo-bron-vragen>
+              <noscript><p>Deze oefening heeft JavaScript nodig.</p></noscript>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo 2: gameshow-fragment — compact, demo 1 is de ster -->
+        <div class="puzzel" data-demo-gameshow>
+          <p class="eyebrow eyebrow--rood">Demo 2 — Flitsronde, één ronde uit de gameshow</p>
+          <p class="puzzel__opdracht">Drie vragen, vijftien seconden per vraag. Snelheid loont — zoals in de les.</p>
+          <div class="puzzel__interactie" data-demo-gameshow-speelveld>
+            <noscript><p>De gameshow heeft JavaScript nodig.</p></noscript>
+          </div>
+        </div>
+
+        <p class="klas-voortgang" data-klas-voortgang aria-live="polite"></p>
+
+        <div class="ontgrendeling" data-unlock-klas></div>
+      </section>
+
+      <section class="station" id="station-toekomst" aria-labelledby="kop-toekomst">
+        <header class="station__kop">
+          <p class="eyebrow">Station 6 van 6 — De Toekomst</p>
+          <h2 id="kop-toekomst">Visie &amp; Contact</h2>
+        </header>
+
+        <div class="station__inhoud">
+          <div class="station__verhaal">
+            <p>Geschiedenis is een denkvak. Wie bij mij in de les zit, leert niet alleen wat er gebeurd is, maar hoe je dat te weten komt: met bronnen redeneren, oorzaak en gevolg wegen, standplaatsgebondenheid herkennen — bij Nixon, bij een Marshallplan-poster, en straks bij elk bericht dat op je telefoon binnenkomt. Dat zijn geen toetsvaardigheden; dat is burgerschap in de letterlijke zin.</p>
+            <p>Activerende didactiek en spelvormen zijn daarbij middel, geen doel. Een escape room is geslaagd als leerlingen harder nadenken dan ze doorhebben — en mislukt als het alleen leuk was. Daarom bouw ik mijn materiaal zelf: curriculumontwerp is een ambacht, van leerdoel tot toets, en elke werkvorm moet dat ambacht dienen.</p>
+            <p>En: onderwijs maak je samen. Met een sectie die materiaal deelt en op elkaars werk voortbouwt, met een school die verder kijkt dan het eigen lokaal, en met leerlingen die serieus genomen worden als denkers. De reis die u zojuist maakte, is dus ook een uitnodiging: de komende jaren bouw ik het liefst verder met een team dat net zo nieuwsgierig is als de klas.</p>
+          </div>
+          <figure class="station__figuur">
+            <img src="/img/station-toekomst-cellarius.webp" loading="lazy" width="1600" height="1380"
+                 alt="Barokke hemelkaart van Andreas Cellarius uit 1660: het copernicaanse wereldbeeld met de zon in het midden, omringd door planeetbanen, sterrenbeelden en cherubijnen in de hoeken." />
+            <figcaption>Andreas Cellarius, <em>Planisphaerium Copernicanum</em>, uit Harmonia Macrocosmica (1660) — verleden en toekomst in één beeld</figcaption>
+          </figure>
+        </div>
+
+        <div class="contact">
+          <p class="eyebrow eyebrow--rood">Contact</p>
+          <p class="contact__regel">Ben van Ooijen · eerstegraads docent geschiedenis · Rotterdam</p>
+          <p class="contact__acties">
+            <a class="knop knop--rood" href="mailto:benvanooijen1984@gmail.com">Stuur een e-mail</a>
+            <a class="knop knop--omtrek" href="/cv-ben-van-ooijen.pdf" download>Download het CV (PDF)</a>
+          </p>
+        </div>
+
+        <div class="puzzel" data-toekomst-stempel>
+          <p class="eyebrow eyebrow--rood">De laatste stempel</p>
+          <p class="puzzel__opdracht">Dit station heeft geen puzzel — de toekomst is nog niet geschreven. De laatste stempel zet u zelf.</p>
+          <div class="puzzel__interactie" data-toekomst-interactie>
+            <noscript><p>De stempel heeft JavaScript nodig — het gebaar telt.</p></noscript>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Reisdossier: signature-element, krijgt per station een stempel -->
+  <aside class="dossier" data-dossier aria-label="Reisdossier met stempels"></aside>
+
+  <footer class="site-voet">
+    <p>
+      <a href="/overzicht/">Overzicht</a> ·
+      <a href="/colofon/">Colofon &amp; beeldverantwoording</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

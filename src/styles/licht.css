@@ -1,0 +1,205 @@
+/* ============================================================
+   Lichte modus — /overzicht en /colofon (§4)
+   Zelfde tokens, omgekeerde toepassing: perkament/wit met inkt.
+   Print- en scanvriendelijk.
+   ============================================================ */
+
+body {
+  background: var(--perkament);
+  color: var(--inkt);
+}
+
+a {
+  color: var(--archiefblauw);
+}
+
+a:hover {
+  color: var(--rood);
+}
+
+::selection {
+  background: var(--goud);
+  color: var(--inkt);
+}
+
+.licht-pagina {
+  width: min(var(--breedte-tekst), 100% - 2 * var(--ruimte-4));
+  margin-inline: auto;
+  padding-block: var(--ruimte-5) var(--ruimte-7);
+}
+
+.licht-kop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--ruimte-3);
+  width: min(var(--breedte-tekst), 100% - 2 * var(--ruimte-4));
+  margin-inline: auto;
+  padding-block: var(--ruimte-3);
+  border-bottom: 2px solid var(--inkt);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+}
+
+.licht-kop a {
+  text-decoration: none;
+}
+
+.licht-pagina h1 {
+  font-size: var(--maat-kop-2);
+  margin-top: var(--ruimte-2);
+}
+
+.licht-pagina h2 {
+  font-size: 1.25rem;
+  margin-top: var(--ruimte-5);
+  padding-bottom: var(--ruimte-1);
+  border-bottom: 1px solid var(--perkament-dof);
+}
+
+.licht-pagina p {
+  margin-top: var(--ruimte-3);
+}
+
+.licht-pagina .eyebrow {
+  color: var(--rood);
+}
+
+.stub-melding {
+  margin-top: var(--ruimte-5);
+  font-family: var(--font-typewriter);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: #6b6350;
+}
+
+/* -- CV-overzicht -- */
+
+.cv-kop {
+  display: flex;
+  gap: var(--ruimte-4);
+  align-items: center;
+}
+
+.cv-kop__foto {
+  flex: 0 0 auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--goud-dof);
+  object-fit: cover;
+}
+
+.cv-kop__sub {
+  margin-top: var(--ruimte-2);
+  font-family: var(--font-ui);
+  color: #4b4433;
+}
+
+.cv-intro {
+  margin-top: var(--ruimte-4);
+  font-size: 1.08rem;
+}
+
+.cv-acties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ruimte-2);
+  margin-top: var(--ruimte-4);
+}
+
+.knop-licht {
+  display: inline-block;
+  padding: 0.6rem 1.3rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--rood);
+  text-decoration: none;
+  border: 1.5px solid var(--rood);
+  border-radius: var(--radius);
+  transition: background var(--duur-kort), color var(--duur-kort);
+}
+
+.knop-licht:hover {
+  background: rgb(179 38 30 / 0.08);
+  color: var(--rood);
+}
+
+.knop-licht--vol {
+  background: var(--rood);
+  color: var(--perkament);
+}
+
+.knop-licht--vol:hover {
+  background: var(--rood-fel);
+  color: var(--perkament);
+}
+
+.cv-lijst {
+  margin: var(--ruimte-3) 0 0;
+}
+
+.cv-item {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: var(--ruimte-3);
+  padding-block: var(--ruimte-3);
+}
+
+.cv-item + .cv-item {
+  border-top: 1px solid var(--perkament-dof);
+}
+
+.cv-item dt {
+  font-family: var(--font-typewriter);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: #6b6350;
+  padding-top: 0.2em;
+}
+
+.cv-item dd {
+  margin: 0;
+}
+
+.cv-item dd p {
+  margin-top: var(--ruimte-1);
+  font-size: 0.98rem;
+}
+
+.cv-punten {
+  margin: var(--ruimte-3) 0 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: var(--ruimte-2);
+}
+
+.cv-voet {
+  margin-top: var(--ruimte-6);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 33rem) {
+  .cv-kop {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cv-item {
+    grid-template-columns: 1fr;
+    gap: var(--ruimte-1);
+  }
+}
+
+@media print {
+  .licht-kop nav,
+  .geen-print {
+    display: none;
+  }
+
+  body {
+    background: #fff;
+  }
+}

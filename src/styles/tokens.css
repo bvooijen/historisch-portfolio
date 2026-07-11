@@ -1,0 +1,61 @@
+/* ============================================================
+   De Reis van de Historicus — design tokens (contentplan §4)
+   Donkere reis · licht overzicht · zelfde tokens, omgekeerd.
+   ============================================================ */
+
+:root {
+  /* -- kleur -- */
+  --inkt: #12141a;          /* basis, donkere modus achtergrond */
+  --inkt-90: #1a1d26;       /* kaarten op inkt */
+  --inkt-70: #232733;       /* randen, verhoogde vlakken */
+  --marine: #242852;        /* vlakken, accenten */
+  --goud: #e8b84b;          /* koppen, stempels */
+  --goud-dof: #c99e3f;      /* goud op licht / hover */
+  --rood: #b3261e;          /* interactie, CTA, puzzel-labels */
+  --rood-fel: #d13a31;      /* hover/focus op rood */
+  --rood-tekst: #e4695f;    /* rode tekst op donker: haalt 4,5:1 (WCAG AA) */
+  --perkament: #f2e9d8;     /* lichte modus, documentkaarten */
+  --perkament-dof: #e6dac2; /* vlakken op perkament */
+  --archiefblauw: #4a66ac;  /* citaten, links */
+  --archiefblauw-licht: #8ba0d4; /* links op donker */
+
+  /* tekst op donker */
+  --tekst: #e9e4d8;
+  --tekst-dof: #a8a294;
+
+  /* -- typografie -- */
+  --font-verhaal: 'Spectral', 'Iowan Old Style', Georgia, serif;
+  --font-ui: 'Archivo', 'Segoe UI', system-ui, sans-serif;
+  --font-typewriter: 'Special Elite', 'Courier Prime', 'Courier New', monospace;
+
+  --maat-eyebrow: 0.72rem;
+  --spatie-eyebrow: 0.28em;
+
+  /* vloeiende maten */
+  --maat-kop-1: clamp(2rem, 5.5vw, 3.4rem);
+  --maat-kop-2: clamp(1.5rem, 3.5vw, 2.2rem);
+  --maat-lopend: clamp(1rem, 1.1vw + 0.85rem, 1.125rem);
+
+  /* -- ritme -- */
+  --ruimte-1: 0.25rem;
+  --ruimte-2: 0.5rem;
+  --ruimte-3: 1rem;
+  --ruimte-4: 1.5rem;
+  --ruimte-5: 2.5rem;
+  --ruimte-6: 4rem;
+  --ruimte-7: 6rem;
+
+  --breedte-tekst: 42rem;
+  --breedte-breed: 68rem;
+
+  --radius: 4px;
+  --radius-groot: 10px;
+
+  --schaduw-kaart: 0 2px 8px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.25);
+  --lijn: 1px solid var(--inkt-70);
+
+  /* overgangen — uitgezet bij prefers-reduced-motion in base.css */
+  --duur-kort: 180ms;
+  --duur-lang: 500ms;
+  --verloop: cubic-bezier(0.22, 1, 0.36, 1);
+}
