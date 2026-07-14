@@ -1,0 +1,19 @@
+HET DEPOT
+=========
+
+Sleep hier alles naartoe wat mogelijk de site op kan: screenshots van
+tools, lesmateriaal-fragmenten, posters, foto's. Hoe meer hoe beter —
+niets uit deze map wordt vanzelf gepubliceerd. Publicatie loopt altijd
+via een curatiestap (scripts/images.mjs) en het colofon.
+
+Checklist per stuk vóórdat het de zaal in mag:
+  [ ] geen leerlingnamen of herkenbare leerlingen
+  [ ] geen methode-afbeeldingen (Bricks/Feniks/Forum)
+  [ ] geen gelicenseerd beeld van derden
+  [ ] AI-gegenereerd beeld: interface-knoppen/watermerken bijsnijden
+  [ ] bron/omschrijving bekend (voor bijschrift en colofon)
+
+Drie bestemmingen:
+  - salon-wand : klein decor in gouden lijst, geen bijschrift
+  - kabinet    : max ~12 stuks met bijschrift in station 5
+  - depot      : blijft hier, prima

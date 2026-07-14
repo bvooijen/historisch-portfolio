@@ -8,7 +8,7 @@
  *
  * Draaien: npm run images
  */
-import { mkdir, access, copyFile } from 'node:fs/promises';
+import { mkdir, access, copyFile, writeFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -75,6 +75,64 @@ const BEELDEN = [
     duotoon: false,
     maxBreedte: 714,
     bron: 'E. Spreekmeester, "Whatever the weather, we only reach welfare together" (1950), affiche voor de Marshallplan-postercampagne van de ECA. US National Archives (RG 286) — publiek domein (US government work), via Wikimedia Commons.',
+  },
+];
+
+/**
+ * Salon-wanden: klein publiek-domein-werk per tijdvak, als decor in gouden
+ * lijsten tussen de stations. Uniform duotoon, max 800 px. Het manifest
+ * (public/img/salon/manifest.json) vertelt de 3D-zaal wat er hangt.
+ */
+const SALON = [
+  {
+    id: 'salon-exekias',
+    url: 'https://images.metmuseum.org/CRDImages/gr/original/DP218568.jpg',
+    bron: 'Exekias, terracotta hals-amfora met deksel (ca. 540 v.Chr.). The Met, 17.230.14a,b — Open Access (CC0).',
+  },
+  {
+    id: 'salon-panathenaeen',
+    url: 'https://images.metmuseum.org/CRDImages/gr/original/DP245711.jpg',
+    bron: 'Euphiletos Painter, Panathenaeïsche prijsamfora (ca. 530 v.Chr.). The Met, 14.130.12 — Open Access (CC0).',
+  },
+  {
+    id: 'salon-eertvelt',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/8/82/Andries_van_Eertvelt_-_The_Return_to_Amsterdam_of_the_Second_Expedition_to_the_East_Indies_on_19th_July_1599.jpg',
+    bron: 'Andries van Eertvelt, "The Return to Amsterdam of the Second Expedition to the East Indies" (ca. 1610–1620) — publiek domein, via Wikimedia Commons.',
+  },
+  {
+    id: 'salon-castello-redraft',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Redraft_of_the_Castello_Plan_New_Amsterdam_in_1660_by_John_Wolcott_Adams.jpg',
+    bron: 'John Wolcott Adams & I.N. Phelps Stokes, "Redraft of the Castello Plan, New Amsterdam in 1660" (1916) — publiek domein, via Wikimedia Commons.',
+  },
+  {
+    id: 'salon-barclay-stempel',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Barclay_telegraph_instrument._Stamping_machine_with_woman_operator_LCCN2013647214.jpg',
+    bron: '"Barclay telegraph instrument, stamping machine with woman operator" (1908). Library of Congress, LCCN 2013647214 — publiek domein.',
+  },
+  {
+    id: 'salon-telefoniste',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/The_First_Chinese_telephone_operator_in_Chinatown%2C_San_Francisco_LCCN92504608.jpg',
+    bron: '"The first Chinese telephone operator in Chinatown, San Francisco" (ca. 1901). Library of Congress, LCCN 92504608 — publiek domein.',
+  },
+  {
+    id: 'salon-manhattan-smog',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/9/94/SKYSCRAPERS_OF_MANHATTAN_VEILED_IN_SMOG_-_NARA_-_548360.jpg',
+    bron: 'Chester Higgins, "Skyscrapers of Manhattan veiled in smog" (1973), Documerica/EPA. US National Archives, 548360 — publiek domein.',
+  },
+  {
+    id: 'salon-staten-island',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/STATEN_ISLAND_FERRY_WITH_SMOG-OBSCURED_SKYLINE_OF_LOWER_MANHATTAN_IN_BACKGROUND._ON_THE_RIGHT_ARE_THE_TWIN_TOWERS_OF..._-_NARA_-_549900.jpg',
+    bron: 'Wil Blanche, "Staten Island Ferry with smog-obscured skyline of Lower Manhattan" (1973), Documerica/EPA. US National Archives, 549900 — publiek domein.',
+  },
+  {
+    id: 'salon-ptolemaeus',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Cellarius_Harmonia_Macrocosmica_-_Planisphaerium_Ptolemaicum.jpg',
+    bron: 'Andreas Cellarius, "Planisphaerium Ptolemaicum", uit Harmonia Macrocosmica (1660) — publiek domein, via Wikimedia Commons.',
+  },
+  {
+    id: 'salon-brahe',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Cellarius_Harmonia_Macrocosmica_-_Planisphaerium_Braheum.jpg',
+    bron: 'Andreas Cellarius, "Planisphaerium Braheum", uit Harmonia Macrocosmica (1660) — publiek domein, via Wikimedia Commons.',
   },
 ];
 
@@ -178,6 +236,38 @@ async function ogBeeld() {
   console.log(`  ✓ ${doel}`);
 }
 
+async function salon() {
+  const map = resolve(DOELMAP, 'salon');
+  await mkdir(map, { recursive: true });
+  const manifest = [];
+
+  for (const stuk of SALON) {
+    const origineel = resolve(BRONMAP, `${stuk.id}-origineel.png`);
+    await download(stuk.url, origineel);
+
+    let buffer = await sharp(origineel)
+      .resize({ width: 800, withoutEnlargement: true })
+      .toBuffer();
+    buffer = await duotoon(buffer);
+    const doel = resolve(map, `${stuk.id}.webp`);
+    await sharp(buffer).webp({ quality: 74 }).toFile(doel);
+
+    const { width, height } = await sharp(doel).metadata();
+    manifest.push({
+      bestand: `/img/salon/${stuk.id}.webp`,
+      verhouding: +(height / width).toFixed(4),
+      bron: stuk.bron,
+    });
+    console.log(`  ✓ salon: ${stuk.id}`);
+  }
+
+  await writeFile(
+    resolve(map, 'manifest.json'),
+    JSON.stringify(manifest, null, 1)
+  );
+  console.log(`  ✓ salon/manifest.json (${manifest.length} stukken)`);
+}
+
 async function schermen() {
   for (const scherm of SCHERMEN) {
     const doel = resolve(DOELMAP, `${scherm.id}.webp`);
@@ -196,4 +286,5 @@ await avatar();
 await cv();
 await schermen();
 await ogBeeld();
+await salon();
 console.log('Klaar.');

@@ -10,12 +10,15 @@ import { PORTALEN, bemonsterCamera, finaleVoortgang } from './reiskaart.js';
  */
 
 const GOUD = new THREE.Color('#e8b84b');
-const ACHTERGROND = '#120d08'; /* warm museumdonker */
-const WALNOOT = '#432e1b';
-const WALNOOT_DONKER = '#241609';
-const GROEN = '#1d3b2f'; /* museumwand-groen */
-const GROEN_DONKER = '#122619';
-const WARMLICHT = '#ffd9a0';
+/* Middaglicht-palet: The Crown/Downton — rijk maar verlicht */
+const ACHTERGROND = '#211812'; /* warm, niet langer nachtelijk */
+const WALNOOT = '#5a3d22'; /* richting mahonie */
+const WALNOOT_DONKER = '#33200f';
+const GROEN = '#2a5341'; /* lichter landhuis-groen */
+const GROEN_DONKER = '#1b3a2d';
+const BORDEAUX = '#5c2026';
+const WARMLICHT = '#ffe2b0';
+const DAGLICHT = '#fff3da';
 
 /* zaalmaten */
 const HALF_BREED = 18;
@@ -39,7 +42,7 @@ export function bouwSchouwtoneel(canvas) {
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(ACHTERGROND);
-  scene.fog = new THREE.Fog(new THREE.Color(ACHTERGROND), 26, 110);
+  scene.fog = new THREE.Fog(new THREE.Color(ACHTERGROND), 32, 150);
 
   const camera = new THREE.PerspectiveCamera(
     46,
@@ -69,6 +72,9 @@ export function bouwSchouwtoneel(canvas) {
     portaalObjecten.set(portaal.id, groep);
     scene.add(groep);
   }
+
+  /* -- salon-wanden: klein werk in gouden lijsten tussen de stations -- */
+  bouwSalon(scene, texturen);
 
   /* -- finale: warme gloed op de aarde in het Cellarius-blad -- */
   const cellarius = portaalObjecten.get('cellarius');
@@ -158,7 +164,7 @@ export function bouwSchouwtoneel(canvas) {
       );
     }
     gloed.material.opacity = 0.06 + finale * 0.85;
-    scene.fog.far = 110 + finale * 200; /* de zaal licht op naar het einde */
+    scene.fog.far = 150 + finale * 200; /* de zaal licht op naar het einde */
 
     renderer.render(scene, camera);
   }
@@ -258,23 +264,19 @@ function bouwZaal(scene) {
   vloer.position.set(0, VLOER_Y, middenZ);
   zaal.add(vloer);
 
-  /* de loper: diep groen met gouden bies, hij wijst de weg */
+  /* de loper: bordeaux met gouden biezen en medaillons, hij wijst de weg */
+  const loperTextuur = loperPatroon();
+  loperTextuur.repeat.set(1, Math.round(lengte / 9));
   const loper = new THREE.Mesh(
-    new THREE.PlaneGeometry(6, lengte),
-    new THREE.MeshBasicMaterial({ color: GROEN_DONKER, fog: true })
+    new THREE.PlaneGeometry(6.4, lengte),
+    new THREE.MeshBasicMaterial({ map: loperTextuur, fog: true })
   );
   loper.rotation.x = -Math.PI / 2;
   loper.position.set(0, VLOER_Y + 0.02, middenZ);
   zaal.add(loper);
-  for (const kant of [-1, 1]) {
-    const bies = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.18, lengte),
-      new THREE.MeshBasicMaterial({ color: GOUD, transparent: true, opacity: 0.5, fog: true })
-    );
-    bies.rotation.x = -Math.PI / 2;
-    bies.position.set(kant * 3.2, VLOER_Y + 0.03, middenZ);
-    zaal.add(bies);
-  }
+
+  /* hoge boogramen met middaglicht langs de linkerwand */
+  bouwRamen(zaal);
 
   /* wanden: walnoten lambrisering onder, museumgroen boven, gouden lijst */
   const lambriseringTextuur = houtTextuur();
@@ -353,6 +355,147 @@ function bouwZaal(scene) {
 
   scene.add(zaal);
   return deuren;
+}
+
+function loperPatroon() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 384; /* één patroonrapport, herhaalt langs de lengte */
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = BORDEAUX;
+  ctx.fillRect(0, 0, 256, 384);
+
+  /* randbanen: goud — groen — goud */
+  ctx.fillStyle = '#c99e3f';
+  ctx.fillRect(8, 0, 5, 384);
+  ctx.fillRect(243, 0, 5, 384);
+  ctx.fillStyle = GROEN_DONKER;
+  ctx.fillRect(17, 0, 14, 384);
+  ctx.fillRect(225, 0, 14, 384);
+  ctx.fillStyle = '#c99e3f';
+  ctx.fillRect(35, 0, 3, 384);
+  ctx.fillRect(218, 0, 3, 384);
+
+  /* medaillons in het veld */
+  ctx.strokeStyle = 'rgba(201, 158, 63, 0.75)';
+  ctx.lineWidth = 3;
+  for (const [cx, cy, r] of [
+    [128, 96, 46],
+    [128, 288, 46],
+  ]) {
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - r);
+    ctx.lineTo(cx + r * 0.62, cy);
+    ctx.lineTo(cx, cy + r);
+    ctx.lineTo(cx - r * 0.62, cy);
+    ctx.closePath();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(cx, cy, r * 0.28, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  /* kleine groene stippen tussen de medaillons */
+  ctx.fillStyle = 'rgba(42, 83, 65, 0.9)';
+  for (const cy of [0, 192, 384]) {
+    ctx.beginPath();
+    ctx.arc(128, cy, 7, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  /* zachte slijtage zodat het textiel leeft */
+  for (let i = 0; i < 260; i++) {
+    ctx.fillStyle = `rgba(0,0,0,${Math.random() * 0.05})`;
+    ctx.fillRect(Math.random() * 256, Math.random() * 384, 2, 2);
+  }
+
+  const textuur = new THREE.CanvasTexture(canvas);
+  textuur.wrapS = textuur.wrapT = THREE.RepeatWrapping;
+  textuur.colorSpace = THREE.SRGBColorSpace;
+  return textuur;
+}
+
+function raamTextuur() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+
+  /* boogvorm: rechthoek met halfronde kop, de rest blijft transparant */
+  ctx.beginPath();
+  ctx.moveTo(16, 512);
+  ctx.lineTo(16, 144);
+  ctx.arc(128, 144, 112, Math.PI, 0);
+  ctx.lineTo(240, 512);
+  ctx.closePath();
+  const verloop = ctx.createLinearGradient(0, 0, 256, 512);
+  verloop.addColorStop(0, '#fff6e4');
+  verloop.addColorStop(0.55, '#ffedc9');
+  verloop.addColorStop(1, '#f3ddb0');
+  ctx.fillStyle = verloop;
+  ctx.fill();
+
+  /* roeden */
+  ctx.strokeStyle = '#2c1d10';
+  ctx.lineWidth = 10;
+  ctx.stroke();
+  ctx.lineWidth = 6;
+  for (const x of [90, 166]) {
+    ctx.beginPath();
+    ctx.moveTo(x, 512);
+    ctx.lineTo(x, 60);
+    ctx.stroke();
+  }
+  for (const y of [144, 260, 380]) {
+    ctx.beginPath();
+    ctx.moveTo(16, y);
+    ctx.lineTo(240, y);
+    ctx.stroke();
+  }
+
+  const textuur = new THREE.CanvasTexture(canvas);
+  textuur.colorSpace = THREE.SRGBColorSpace;
+  return textuur;
+}
+
+function bouwRamen(zaal) {
+  const textuur = raamTextuur();
+  const raamMateriaal = new THREE.MeshBasicMaterial({
+    map: textuur,
+    transparent: true,
+    fog: false, /* daglicht laat zich niet dempen door zaalmist */
+  });
+  const poolTextuur = maakGloed(DAGLICHT).material.map;
+
+  for (let z = -28; z > ZAAL_EIND + 20; z -= 40) {
+    const raam = new THREE.Mesh(new THREE.PlaneGeometry(5, 10), raamMateriaal);
+    raam.rotation.y = Math.PI / 2;
+    raam.position.set(-HALF_BREED + 0.05, 1.5, z);
+    zaal.add(raam);
+
+    /* gloed om het raam */
+    const schijnsel = maakGloed(DAGLICHT);
+    schijnsel.material.opacity = 0.22;
+    schijnsel.position.set(-HALF_BREED + 0.8, 1.5, z);
+    schijnsel.scale.setScalar(16);
+    zaal.add(schijnsel);
+
+    /* lichtplas op de vloer, iets de zaal in geschoven */
+    const plas = new THREE.Mesh(
+      new THREE.PlaneGeometry(9, 13),
+      new THREE.MeshBasicMaterial({
+        map: poolTextuur,
+        transparent: true,
+        opacity: 0.16,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      })
+    );
+    plas.rotation.x = -Math.PI / 2;
+    plas.rotation.z = 0.5;
+    plas.position.set(-HALF_BREED + 6.5, VLOER_Y + 0.05, z + 1.5);
+    zaal.add(plas);
+  }
 }
 
 function bouwEntree(zaal) {
@@ -539,7 +682,15 @@ function maakSchilderij(portaal, texturen) {
     groep.add(lijst);
   }
 
-  /* picture-light: warme schijn van boven op het doek */
+  /* picture-light: messing balkje met warme schijn van boven op het doek */
+  const armatuur = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.05, 0.05, breedte * 0.45, 8),
+    new THREE.MeshBasicMaterial({ color: '#c99e3f', fog: true })
+  );
+  armatuur.rotation.z = Math.PI / 2;
+  armatuur.position.set(0, hoogte / 2 + rand / 2 + 0.22, 0.25);
+  groep.add(armatuur);
+
   const lamp = maakGloed(WARMLICHT);
   lamp.material.opacity = 0.3;
   lamp.position.set(0, hoogte / 2 + 0.4, 0.8);
@@ -549,6 +700,67 @@ function maakSchilderij(portaal, texturen) {
   groep.position.set(...portaal.positie);
   groep.userData.basisY = portaal.positie[1];
   return groep;
+}
+
+/* vaste haken aan de wanden: rechts vrij spel, links tussen de ramen */
+const SALON_HAKEN = [
+  { kant: 1, z: -35 },
+  { kant: 1, z: -60 },
+  { kant: 1, z: -75 },
+  { kant: 1, z: -110 },
+  { kant: -1, z: -88 },
+  { kant: 1, z: -145 },
+  { kant: -1, z: -168 },
+  { kant: 1, z: -190 },
+  { kant: 1, z: -225 },
+  { kant: -1, z: -248 },
+];
+
+async function bouwSalon(scene, texturen) {
+  let manifest;
+  try {
+    manifest = await (await fetch('/img/salon/manifest.json')).json();
+  } catch {
+    return; /* geen salon-manifest: kale wanden, geen ramp */
+  }
+
+  manifest.slice(0, SALON_HAKEN.length).forEach((stuk, i) => {
+    const haak = SALON_HAKEN[i];
+    const breedte = Math.min(
+      stuk.verhouding > 1 ? 2.3 : 3.0,
+      3.8 / stuk.verhouding /* hoogte begrensd op ±3,8 */
+    );
+    const hoogte = breedte * stuk.verhouding;
+
+    const groep = new THREE.Group();
+    const textuur = texturen.load(stuk.bestand);
+    textuur.colorSpace = THREE.SRGBColorSpace;
+    groep.add(
+      new THREE.Mesh(
+        new THREE.PlaneGeometry(breedte, hoogte),
+        new THREE.MeshBasicMaterial({ map: textuur, fog: true })
+      )
+    );
+
+    const rand = 0.26;
+    const paneel = new THREE.Mesh(
+      new THREE.BoxGeometry(breedte + rand, hoogte + rand, 0.1),
+      new THREE.MeshBasicMaterial({ color: '#33220f', fog: true })
+    );
+    paneel.position.z = -0.07;
+    groep.add(paneel);
+
+    const lijst = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.PlaneGeometry(breedte + rand, hoogte + rand)),
+      new THREE.LineBasicMaterial({ color: GOUD, transparent: true, opacity: 0.8 })
+    );
+    lijst.position.z = 0.02;
+    groep.add(lijst);
+
+    groep.position.set(haak.kant * (HALF_BREED - 0.18), 1.0, haak.z);
+    groep.rotation.y = -haak.kant * (Math.PI / 2);
+    scene.add(groep);
+  });
 }
 
 function maakGloed(kleur = '#e8b84b') {

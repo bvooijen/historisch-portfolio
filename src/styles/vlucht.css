@@ -43,16 +43,180 @@ body.vlucht-actief .vlucht-paneel {
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
-  scrollbar-color: rgb(232 184 75 / 0.35) transparent;
+  scrollbar-color: rgb(67 46 27 / 0.4) transparent;
   padding: var(--ruimte-4);
-  /* museumtint: warm donker met een vleug groen, koperkleurige rand */
-  background: rgb(17 20 16 / 0.84);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgb(96 130 104 / 0.28);
-  border-radius: var(--radius-groot);
-  box-shadow: var(--schaduw-kaart);
+  /* landhuis-briefpapier: perkament met inkt en een gouden bies */
+  background: rgb(244 236 221 / 0.97);
+  color: var(--inkt);
+  border: 1px solid rgb(67 46 27 / 0.55);
+  outline: 1px solid rgb(201 158 63 / 0.55);
+  outline-offset: -7px;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgb(15 10 5 / 0.5);
   opacity: 0;
   pointer-events: none;
+}
+
+/* -- perkament-binnenwerk: donkere-modus-stijlen omgekeerd --
+   (de landing blijft transparant over de zaal en doet niet mee) */
+
+body.vlucht-actief .vlucht-paneel:not(.landing) h2 {
+  color: var(--inkt);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .eyebrow {
+  color: var(--rood);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) :focus-visible {
+  outline-color: var(--rood);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) a {
+  color: var(--archiefblauw);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .puzzel,
+body.vlucht-actief .vlucht-paneel:not(.landing) .contact {
+  background: var(--perkament-dof);
+  border: 1px solid rgb(67 46 27 / 0.25);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .puzzel__melding,
+body.vlucht-actief .vlucht-paneel:not(.landing) .klas-voortgang {
+  color: #7a5c14;
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .puzzel__antwoord,
+body.vlucht-actief .vlucht-paneel:not(.landing) .puzzel__woord {
+  color: var(--rood);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .ontgrendeling__slot,
+body.vlucht-actief .vlucht-paneel:not(.landing) .bron__toeschrijving,
+body.vlucht-actief .vlucht-paneel:not(.landing) .browserframe figcaption,
+body.vlucht-actief .vlucht-paneel:not(.landing) .demo-bron__poster figcaption,
+body.vlucht-actief .vlucht-paneel:not(.landing) .flits__score {
+  color: #6b6350;
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .flits__score strong {
+  color: var(--rood);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .bron,
+body.vlucht-actief .vlucht-paneel:not(.landing) .morse__sleutel,
+body.vlucht-actief .vlucht-paneel:not(.landing) .optie {
+  background: #fbf6ec;
+  border-color: rgb(67 46 27 / 0.25);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .bron {
+  border-left: 4px solid var(--archiefblauw);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .bron__label {
+  color: var(--archiefblauw);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .optie:hover {
+  border-color: var(--archiefblauw);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .optie--goed {
+  border-color: var(--goud-dof);
+  background: rgb(232 184 75 / 0.14);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .optie--fout {
+  border-color: var(--rood);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .optie__letter {
+  color: var(--rood);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .optie__uitleg {
+  color: #5c5344;
+  border-left-color: rgb(67 46 27 / 0.2);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .schuif {
+  background: var(--perkament-dof);
+  border-color: rgb(67 46 27 / 0.25);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .schuif__grieks {
+  color: var(--archiefblauw);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .schuif__pijl {
+  color: #6b6350;
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .schuif__pijl:hover {
+  color: var(--rood);
+  background: rgb(0 0 0 / 0.07);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .morse__sleutel summary {
+  color: var(--rood);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .morse__alfabet dt {
+  color: var(--inkt);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .morse__alfabet dd {
+  color: #6b6350;
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .morse__letter {
+  background: #fbf6ec;
+  border-color: rgb(67 46 27 / 0.3);
+  color: var(--rood);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .morse__letter--klinkt {
+  background: var(--goud);
+  color: var(--inkt);
+  border-color: var(--goud-dof);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .morse__invoer {
+  background: #fff;
+  color: var(--inkt);
+  border-color: rgb(67 46 27 / 0.35);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .morse__invoer:focus {
+  border-color: var(--rood);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .knop--omtrek {
+  color: var(--rood);
+  border-color: rgb(179 38 30 / 0.55);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .knop--omtrek:hover {
+  border-color: var(--rood);
+  background: rgb(179 38 30 / 0.08);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .flits__tijdbalk {
+  background: rgb(0 0 0 / 0.12);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .stempelknop {
+  color: var(--rood);
+  border-color: var(--rood);
+}
+
+body.vlucht-actief .vlucht-paneel:not(.landing) .dokument {
+  background: #fbf6ec;
+  border: 1px solid rgb(67 46 27 / 0.2);
+  border-left: 4px solid var(--archiefblauw);
+  box-shadow: none;
 }
 
 body.vlucht-actief .vlucht-paneel--actief {
@@ -82,7 +246,9 @@ body.vlucht-actief .landing {
   translate: -50% 0;
   width: min(46rem, 60vw);
   background: transparent;
+  color: var(--tekst);
   border: none;
+  outline: none;
   backdrop-filter: none;
   box-shadow: none;
   overflow: visible;
