@@ -1,5 +1,6 @@
 import { stations } from '../content.js';
 import { getStempels } from './state.js';
+import { magVliegen } from './vlucht/detectie.js';
 
 /**
  * De horizontale tijdlijn — altijd zichtbaar zodra de reis begonnen is (§2).
@@ -59,7 +60,8 @@ export function initTijdlijn() {
   markeerStempels();
   document.addEventListener('reis:stempel', markeerStempels);
 
-  /* actieve halte volgt de scroll */
+  /* actieve halte volgt de scroll — in vluchtmodus stuurt de vlucht dit */
+  if (magVliegen()) return;
   const secties = stations
     .map((s) => document.getElementById(`station-${s.id}`))
     .filter(Boolean);

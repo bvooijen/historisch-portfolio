@@ -1,0 +1,154 @@
+/* ============================================================
+   De vlucht door de tijd — alleen actief op capabele desktops
+   (body.vlucht-actief). Elders geldt de klassieke verticale reis.
+   ============================================================ */
+
+.vlucht-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+}
+
+.vlucht-baan {
+  pointer-events: none;
+}
+
+body.vlucht-actief {
+  overflow-x: hidden;
+}
+
+body.vlucht-actief .site-voet {
+  display: none;
+}
+
+body.vlucht-actief main {
+  position: static;
+}
+
+body.vlucht-actief .stations {
+  width: auto;
+  margin: 0;
+}
+
+/* -- de panelen: stations zweven boven het schouwtoneel -- */
+
+body.vlucht-actief .vlucht-paneel {
+  position: fixed;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 5;
+  width: min(42rem, 46vw);
+  max-height: 80vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(232 184 75 / 0.35) transparent;
+  padding: var(--ruimte-4);
+  /* museumtint: warm donker met een vleug groen, koperkleurige rand */
+  background: rgb(17 20 16 / 0.84);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(96 130 104 / 0.28);
+  border-radius: var(--radius-groot);
+  box-shadow: var(--schaduw-kaart);
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.vlucht-actief .vlucht-paneel--actief {
+  pointer-events: auto;
+}
+
+body.vlucht-actief .vlucht-paneel--rechts {
+  right: 4vw;
+}
+
+body.vlucht-actief .vlucht-paneel--links {
+  left: 4vw;
+}
+
+body.vlucht-actief .vlucht-paneel--midden {
+  left: 50%;
+  translate: -50% -50%;
+}
+
+/* -- de landing: transparant venster op het zwevende schilderij -- */
+
+body.vlucht-actief .landing {
+  min-height: 0;
+  display: block;
+  top: auto;
+  bottom: 4vh;
+  translate: -50% 0;
+  width: min(46rem, 60vw);
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  overflow: visible;
+}
+
+body.vlucht-actief .landing__beeld,
+body.vlucht-actief .landing::after {
+  display: none;
+}
+
+body.vlucht-actief .landing__inhoud {
+  width: auto;
+  padding-block: 0;
+}
+
+/* -- stations compacter in paneelvorm -- */
+
+body.vlucht-actief .station {
+  border-top: none;
+  padding-block: 0;
+  min-height: 0;
+}
+
+body.vlucht-actief .station__figuur {
+  display: none; /* het era-beeld zweeft als portaal in de ruimte */
+}
+
+body.vlucht-actief .station__inhoud {
+  grid-template-columns: 1fr;
+  gap: var(--ruimte-3);
+  margin-top: var(--ruimte-3);
+}
+
+body.vlucht-actief .station__verhaal--breed {
+  margin-top: var(--ruimte-3);
+}
+
+body.vlucht-actief .puzzel {
+  margin-top: var(--ruimte-4);
+  padding: var(--ruimte-3);
+}
+
+body.vlucht-actief .schermen {
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ruimte-3);
+  margin-top: var(--ruimte-4);
+}
+
+body.vlucht-actief .demo-bron__indeling {
+  grid-template-columns: 1fr;
+}
+
+body.vlucht-actief .demo-bron__poster {
+  max-width: 17rem;
+}
+
+body.vlucht-actief .morse {
+  grid-template-columns: 1fr;
+}
+
+body.vlucht-actief .contact {
+  margin-top: var(--ruimte-4);
+  padding: var(--ruimte-3);
+}
+
+/* het zwaartepunt-station mag breder */
+body.vlucht-actief #station-klas.vlucht-paneel {
+  width: min(48rem, 52vw);
+}
