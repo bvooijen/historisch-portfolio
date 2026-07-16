@@ -75,6 +75,17 @@ export function bouwSchouwtoneel(canvas) {
   /* -- salon-wanden: klein werk in messing lijsten tussen de stations -- */
   bouwSalon(scene, texturen);
 
+  /* het openingsdoek lost op zodra de vlucht begint — anders vliegt de
+     camera er op weg naar station 1 dwars doorheen */
+  const vroomDoek = portaalObjecten.get('vroom');
+  const doekMaterialen = [];
+  vroomDoek.traverse((kind) => {
+    if (!kind.material) return;
+    kind.material = kind.material.clone();
+    kind.material.transparent = true;
+    doekMaterialen.push([kind.material, kind.material.opacity]);
+  });
+
   /* -- finale: warme gloed op de aarde in het Cellarius-blad -- */
   const cellarius = portaalObjecten.get('cellarius');
   const kaartHoogte = PORTALEN.at(-1).breedte * PORTALEN.at(-1).verhouding;
@@ -165,6 +176,15 @@ export function bouwSchouwtoneel(canvas) {
     }
     gloed.material.opacity = 0.06 + finale * 0.85;
     scene.fog.far = 150 + finale * 200;
+
+    /* openingsdoek: vol aanwezig bij de entree, opgelost tijdens de start */
+    const doekZicht = 1 - THREE.MathUtils.smoothstep(p, 0.05, 0.095);
+    vroomDoek.visible = doekZicht > 0.002;
+    if (vroomDoek.visible) {
+      for (const [materiaal, basis] of doekMaterialen) {
+        materiaal.opacity = basis * doekZicht;
+      }
+    }
 
     renderer.render(scene, camera);
   }

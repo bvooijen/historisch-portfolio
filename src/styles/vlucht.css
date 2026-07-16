@@ -264,6 +264,38 @@ body.vlucht-actief .landing__inhoud {
   padding-block: 0;
 }
 
+/* scroll-hint: vertelt de bezoeker dat de reis met scrollen begint;
+   alleen in de vlucht, en overbodig zodra de gok is gedaan */
+.landing__scrollhint {
+  display: none;
+}
+
+body.vlucht-actief .landing__scrollhint {
+  display: block;
+  margin-top: var(--ruimte-4);
+  font-family: var(--font-typewriter);
+  font-size: var(--maat-eyebrow);
+  letter-spacing: var(--spatie-eyebrow);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--goud);
+  opacity: 0.85;
+}
+
+body.vlucht-actief.reis-begonnen .landing__scrollhint {
+  display: none;
+}
+
+body.vlucht-actief .landing__scrollhint-pijl {
+  display: inline-block;
+  animation: scrollhint-wenk 1.8s var(--verloop) infinite;
+}
+
+@keyframes scrollhint-wenk {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(0.3rem); }
+}
+
 /* landingstekst blijft leesbaar wanneer hij het lichte doek raakt */
 body.vlucht-actief .landing .eyebrow,
 body.vlucht-actief .landing h1,

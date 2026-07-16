@@ -170,7 +170,9 @@ export function sectieBij(p) {
 export function paneelZicht(p, id) {
   const sectie = SECTIES.find((s) => s.id === id);
   const [a, b] = sectie.bereik;
-  const marge = 0.022;
+  const marge = 0.012; /* krap: panelen zijn snel vol opaak, ook wie
+                          midden in een overgang stopt kijkt niet lang
+                          naar halfdoorzichtige tekst */
   const inFade =
     id === 'landing' ? 1 : THREE.MathUtils.smoothstep(p, a, a + marge);
   const uitFade =
