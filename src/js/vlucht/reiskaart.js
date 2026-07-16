@@ -29,15 +29,15 @@ export const PORTALEN = [
     id: 'vroom',
     src: '/img/landing-vroom-1599.webp',
     verhouding: 3530 / 7658,
-    positie: [0, 0.4, -16],
-    breedte: 21,
+    positie: [0, 0.8, -22],
+    breedte: 12,
   },
   {
     id: 'oudheid',
     src: '/img/station-oudheid-amfora.webp',
     verhouding: 1500 / 1200,
     positie: [-10, 0.8, -50],
-    breedte: 7.5,
+    breedte: 6,
     label: 'Station 1 — De Oudheid',
   },
   {
@@ -45,7 +45,7 @@ export const PORTALEN = [
     src: '/img/station-ontdekkers-castello.webp',
     verhouding: 1200 / 1600,
     positie: [10, -0.6, -90],
-    breedte: 11,
+    breedte: 8.5,
     label: 'Station 2 — De Tijd van Ontdekkers',
   },
   {
@@ -53,7 +53,7 @@ export const PORTALEN = [
     src: '/img/station-netwerk-telegraaf.webp',
     verhouding: 1109 / 1536,
     positie: [-10, 0.8, -130],
-    breedte: 10,
+    breedte: 8,
     label: 'Station 3 — Telegraaf en Telefoon',
   },
   {
@@ -61,7 +61,7 @@ export const PORTALEN = [
     src: '/img/station-master-smog.webp',
     verhouding: 1082 / 1600,
     positie: [10, -0.6, -170],
-    breedte: 10.5,
+    breedte: 8.5,
     label: 'Station 4 — De Tijd van Televisie en Computer',
   },
   {
@@ -69,7 +69,7 @@ export const PORTALEN = [
     src: '/img/scherm-escaperoom.webp',
     verhouding: 984 / 896,
     positie: [-10.5, 0.4, -210],
-    breedte: 8.5,
+    breedte: 7,
     label: 'Station 5 — De Eenentwintigste Eeuw',
   },
   {
@@ -77,7 +77,7 @@ export const PORTALEN = [
     src: '/img/station-toekomst-cellarius.webp',
     verhouding: 1380 / 1600,
     positie: [0, 1, -262],
-    breedte: 20,
+    breedte: 16,
     label: 'Station 6 — De Toekomst',
   },
 ];
@@ -93,8 +93,8 @@ export function finaleVoortgang(p) {
 
 const CAMERA_SLEUTELS = [
   /* voor de walnoten dubbeldeur, die vanzelf openzwaait */
-  { p: 0.0, pos: [0, 0.3, 11], doel: [0, 0.4, -16], fov: 46 },
-  { p: 0.05, pos: [0, 0.4, 3.5], doel: [0, 0.4, -16], fov: 47 },
+  { p: 0.0, pos: [0, 0.3, 11], doel: [0, 0.8, -22], fov: 46 },
+  { p: 0.05, pos: [0, 0.4, 3.5], doel: [0, 0.8, -22], fov: 47 },
   { p: 0.08, pos: [2, 0.6, -6], doel: [-7, 0.8, -50], fov: 50 },
   { p: 0.15, pos: [3.2, 0.4, -32], doel: [-10, 0.8, -50], fov: 50 },
   { p: 0.21, pos: [-2, 0, -58], doel: [7, -0.6, -90], fov: 51 },
@@ -107,8 +107,8 @@ const CAMERA_SLEUTELS = [
   { p: 0.7, pos: [3, 0, -192], doel: [-10.5, 0.4, -210], fov: 50 },
   /* de blik stijgt naar de aarde op het heliocentrische blad */
   { p: 0.78, pos: [0, 0, -222], doel: [0, 1, -262], fov: 48 },
-  { p: 0.9, pos: [0, 0.8, -238], doel: [0, 2.4, -262], fov: 44 },
-  { p: 1.0, pos: [0, 2.2, -252], doel: [0, 3.4, -262], fov: 38 },
+  { p: 0.9, pos: [0, 0.7, -238], doel: [0, 2.1, -262], fov: 44 },
+  { p: 1.0, pos: [0, 1.9, -252], doel: [0, 2.95, -262], fov: 38 },
 ];
 
 function bouwKromme(sleutels, veld) {

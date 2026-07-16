@@ -38,8 +38,8 @@ body.vlucht-actief .vlucht-paneel {
   top: 50%;
   translate: 0 -50%;
   z-index: 5;
-  width: min(42rem, 46vw);
-  max-height: 80vh;
+  width: min(38rem, 42vw);
+  max-height: 78vh;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
@@ -244,7 +244,7 @@ body.vlucht-actief .landing {
   top: auto;
   bottom: 4vh;
   translate: -50% 0;
-  width: min(46rem, 60vw);
+  width: min(40rem, 52vw);
   background: transparent;
   color: var(--tekst);
   border: none;
@@ -262,6 +262,13 @@ body.vlucht-actief .landing::after {
 body.vlucht-actief .landing__inhoud {
   width: auto;
   padding-block: 0;
+}
+
+/* landingstekst blijft leesbaar wanneer hij het lichte doek raakt */
+body.vlucht-actief .landing .eyebrow,
+body.vlucht-actief .landing h1,
+body.vlucht-actief .landing p {
+  text-shadow: 0 1px 3px rgb(15 10 5 / 0.85), 0 2px 14px rgb(15 10 5 / 0.7);
 }
 
 /* -- stations compacter in paneelvorm -- */
@@ -316,5 +323,5 @@ body.vlucht-actief .contact {
 
 /* het zwaartepunt-station mag breder */
 body.vlucht-actief #station-klas.vlucht-paneel {
-  width: min(48rem, 52vw);
+  width: min(44rem, 48vw);
 }

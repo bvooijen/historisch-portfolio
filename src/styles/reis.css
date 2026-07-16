@@ -953,13 +953,24 @@ body {
   gap: var(--ruimte-2);
 }
 
+/* vellum: gevlekt perkament, opgebouwd uit gelaagde verlopen */
+.dossier__knop,
+.dossier__paneel {
+  background-color: var(--perkament);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 20% 15%, rgb(140 110 60 / 0.1), transparent 55%),
+    radial-gradient(ellipse 90% 110% at 85% 80%, rgb(120 90 50 / 0.12), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 60% 30%, rgb(255 252 240 / 0.5), transparent 65%),
+    radial-gradient(ellipse 45% 60% at 35% 75%, rgb(150 115 60 / 0.08), transparent 60%);
+}
+
 .dossier__knop {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
-  padding: var(--ruimte-2) var(--ruimte-3);
-  background: var(--perkament);
+  padding: var(--ruimte-2) calc(var(--ruimte-3) + 1.9rem) var(--ruimte-2) var(--ruimte-3);
   color: var(--inkt);
   border: 1px solid var(--goud-dof);
   border-radius: var(--radius);
@@ -967,6 +978,29 @@ body {
   cursor: pointer;
   transform: rotate(-1deg);
   transition: transform var(--duur-kort);
+}
+
+/* het geprege goudzegel */
+.dossier__knop::after {
+  content: 'ἱ';
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  translate: 0 -50%;
+  width: 1.55rem;
+  height: 1.55rem;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-verhaal);
+  font-size: 0.85rem;
+  color: rgb(90 62 20 / 0.85);
+  background:
+    radial-gradient(circle at 32% 28%, #f3d789, #c99e3f 55%, #8a6a2c 90%);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 1px 2px rgb(255 240 200 / 0.8),
+    inset 0 -2px 3px rgb(70 45 10 / 0.55),
+    0 1px 2px rgb(0 0 0 / 0.35);
 }
 
 .dossier__knop:hover {
@@ -987,11 +1021,15 @@ body {
   order: -1; /* paneel klapt omhoog, boven de knop */
   width: min(20rem, calc(100vw - 2 * var(--ruimte-3)));
   padding: var(--ruimte-3);
-  background: var(--perkament);
   color: var(--inkt);
   border: 1px solid var(--goud-dof);
   border-radius: var(--radius-groot);
   box-shadow: var(--schaduw-kaart);
+}
+
+.dossier__telling {
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
 }
 
 .dossier__uitleg {
