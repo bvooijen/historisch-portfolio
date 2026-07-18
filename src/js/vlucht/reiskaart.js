@@ -12,7 +12,9 @@ export const PAGINAS = 10; /* startbaan = PAGINAS × 100vh */
 
 export const SECTIES = [
   { id: 'landing', bereik: [0.0, 0.08], kant: 'midden' },
-  { id: 'oudheid', bereik: [0.08, 0.21], kant: 'rechts' },
+  /* tussen 0.08 en 0.11 hangt er bewust géén paneel: dat is de
+     onbelemmerde vlucht door de poort van De Oorsprong */
+  { id: 'oudheid', bereik: [0.11, 0.21], kant: 'rechts' },
   { id: 'ontdekkers', bereik: [0.21, 0.34], kant: 'links' },
   { id: 'netwerk', bereik: [0.34, 0.47], kant: 'rechts' },
   { id: 'master', bereik: [0.47, 0.6], kant: 'links' },
@@ -36,7 +38,7 @@ export const PORTALEN = [
     id: 'oudheid',
     src: '/img/station-oudheid-amfora.webp',
     verhouding: 1500 / 1200,
-    positie: [-10, 0.8, -50],
+    positie: [-10, 0.8, -64],
     breedte: 6,
     label: 'Station 1 — De Oudheid',
   },
@@ -95,8 +97,11 @@ const CAMERA_SLEUTELS = [
   /* voor de walnoten dubbeldeur, die vanzelf openzwaait */
   { p: 0.0, pos: [0, 0.3, 11], doel: [0, 0.8, -22], fov: 46 },
   { p: 0.05, pos: [0, 0.4, 3.5], doel: [0, 0.8, -22], fov: 47 },
-  { p: 0.08, pos: [2, 0.6, -6], doel: [-7, 0.8, -50], fov: 50 },
-  { p: 0.15, pos: [3.2, 0.4, -32], doel: [-10, 0.8, -50], fov: 50 },
+  /* de poort van De Oorsprong wordt eerst gekadreerd en dan doorvlogen */
+  { p: 0.08, pos: [0, 0.4, -10], doel: [0, 1.2, -38], fov: 48 },
+  { p: 0.12, pos: [0, 0.3, -30], doel: [-3, 0.9, -60], fov: 50 },
+  /* station 1: de amfora links in beeld, het paneel rechts vrij ervan */
+  { p: 0.16, pos: [2.5, 0.4, -46], doel: [-5, 0.8, -66], fov: 50 },
   { p: 0.21, pos: [-2, 0, -58], doel: [7, -0.6, -90], fov: 51 },
   { p: 0.28, pos: [-3.2, -0.4, -72], doel: [10, -0.6, -90], fov: 51 },
   { p: 0.34, pos: [2, 0.4, -98], doel: [-7, 0.8, -130], fov: 51 },

@@ -178,7 +178,7 @@ export function bouwSchouwtoneel(canvas) {
     scene.fog.far = 150 + finale * 200;
 
     /* openingsdoek: vol aanwezig bij de entree, opgelost tijdens de start */
-    const doekZicht = 1 - THREE.MathUtils.smoothstep(p, 0.05, 0.095);
+    const doekZicht = 1 - THREE.MathUtils.smoothstep(p, 0.04, 0.08);
     vroomDoek.visible = doekZicht > 0.002;
     if (vroomDoek.visible) {
       for (const [materiaal, basis] of doekMaterialen) {
