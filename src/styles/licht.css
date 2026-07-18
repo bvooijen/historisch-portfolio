@@ -29,13 +29,17 @@ a:hover {
 }
 
 .licht-kop {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: var(--ruimte-3);
-  width: min(var(--breedte-tekst), 100% - 2 * var(--ruimte-4));
-  margin-inline: auto;
+  padding-inline: max(var(--ruimte-4), (100% - var(--breedte-breed)) / 2);
   padding-block: var(--ruimte-3);
+  background: rgb(242 233 216 / 0.92);
+  backdrop-filter: blur(6px);
   border-bottom: 2px solid var(--inkt);
   font-family: var(--font-ui);
   font-size: 0.9rem;
@@ -190,6 +194,377 @@ a:hover {
   .cv-item {
     grid-template-columns: 1fr;
     gap: var(--ruimte-1);
+  }
+}
+
+/* ============================================================
+   Overzicht 2.0 — archief-dossier met zijnav, tijdlijn en kaarten
+   ============================================================ */
+
+.overzicht {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: min(var(--breedte-breed), 100% - 2 * var(--ruimte-4));
+  margin-inline: auto;
+  gap: 0 var(--ruimte-6);
+}
+
+.overzicht__inhoud {
+  width: auto;
+  max-width: 46rem;
+}
+
+.overzicht section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* -- zijnav: sticky wegwijzer zoals in museumcollecties -- */
+
+.overzicht-rail {
+  display: none;
+}
+
+@media (min-width: 64em) {
+  .overzicht {
+    grid-template-columns: 11rem minmax(0, 1fr);
+  }
+
+  .overzicht-rail {
+    display: block;
+    padding-block: var(--ruimte-5);
+  }
+
+  .overzicht-rail ol {
+    position: sticky;
+    top: 6.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--ruimte-2);
+  }
+
+  .overzicht-rail__kop {
+    position: sticky;
+    top: 4.2rem;
+    font-family: var(--font-typewriter);
+    font-size: 0.68rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #6b6350;
+    margin-bottom: var(--ruimte-3);
+  }
+
+  .overzicht-rail a {
+    display: inline-block;
+    padding-left: var(--ruimte-3);
+    font-family: var(--font-ui);
+    font-size: 0.86rem;
+    color: #4b4433;
+    text-decoration: none;
+    border-left: 2px solid var(--perkament-dof);
+    transition: color var(--duur-kort), border-color var(--duur-kort);
+  }
+
+  .overzicht-rail a:hover {
+    color: var(--rood);
+  }
+
+  .overzicht-rail a[aria-current='true'] {
+    color: var(--rood);
+    border-left-color: var(--goud-dof);
+    font-weight: 700;
+  }
+}
+
+/* -- hero: editoriale kop met archiefportret -- */
+
+.ovz-hero {
+  display: flex;
+  gap: var(--ruimte-5);
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.ovz-hero h1 {
+  font-size: var(--maat-kop-1);
+  margin-top: var(--ruimte-2);
+  max-width: 24ch;
+}
+
+.ovz-hero__foto {
+  flex: 0 0 auto;
+  width: clamp(110px, 12vw, 160px);
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--goud-dof);
+  box-shadow: 0 0 0 6px var(--perkament), 0 0 0 7px var(--perkament-dof),
+    0 10px 24px rgb(18 20 26 / 0.12);
+  margin-top: var(--ruimte-4);
+}
+
+@media (max-width: 40em) {
+  .ovz-hero {
+    flex-direction: column-reverse;
+    gap: var(--ruimte-3);
+  }
+
+  .ovz-hero__foto {
+    margin-top: 0;
+  }
+}
+
+/* -- kerngetallen: zakelijk scanbaar, museaal strak -- */
+
+.ovz-cijfers {
+  list-style: none;
+  margin: var(--ruimte-6) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--ruimte-3);
+}
+
+.ovz-cijfers li {
+  border-top: 2px solid var(--goud-dof);
+  padding-top: var(--ruimte-2);
+  display: grid;
+  gap: 0.15rem;
+}
+
+.ovz-cijfers strong {
+  font-family: var(--font-verhaal);
+  font-weight: 600;
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+
+.ovz-cijfers span {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: #6b6350;
+}
+
+@media (max-width: 40em) {
+  .ovz-cijfers {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* -- tijdlijn: de gouden lijn met haltes, echo van de reis -- */
+
+.cv-tijdlijn {
+  position: relative;
+}
+
+.cv-tijdlijn::before {
+  content: '';
+  position: absolute;
+  left: 8.45rem;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--goud-dof), var(--perkament-dof));
+}
+
+.cv-tijdlijn .cv-item {
+  position: relative;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: var(--ruimte-4);
+}
+
+.cv-tijdlijn .cv-item::before {
+  content: '';
+  position: absolute;
+  left: 8.16rem;
+  top: 1.35rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--perkament);
+  border: 2px solid var(--goud-dof);
+  z-index: 1;
+}
+
+.cv-tijdlijn .cv-item:first-child::before {
+  background: var(--rood);
+  border-color: var(--rood);
+}
+
+@media (max-width: 33rem) {
+  .cv-tijdlijn::before,
+  .cv-tijdlijn .cv-item::before {
+    display: none;
+  }
+}
+
+/* -- projectkaarten: collectietegels met kalme hover -- */
+
+.ovz-kaarten {
+  list-style: none;
+  margin: var(--ruimte-4) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ruimte-3);
+}
+
+.ovz-kaart {
+  position: relative;
+  background: #fbf6ec;
+  border: 1px solid var(--perkament-dof);
+  border-radius: var(--radius-groot);
+  padding: var(--ruimte-4);
+  transition: translate var(--duur-kort) var(--verloop),
+    box-shadow var(--duur-kort) var(--verloop);
+}
+
+.ovz-kaart::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  border-radius: var(--radius-groot) var(--radius-groot) 0 0;
+  background: var(--goud-dof);
+  opacity: 0;
+  transition: opacity var(--duur-kort);
+}
+
+.ovz-kaart:hover {
+  translate: 0 -3px;
+  box-shadow: 0 10px 24px rgb(18 20 26 / 0.1);
+}
+
+.ovz-kaart:hover::before {
+  opacity: 1;
+}
+
+.ovz-kaart__label {
+  font-family: var(--font-typewriter);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rood);
+}
+
+.ovz-kaart p + p {
+  margin-top: var(--ruimte-2);
+  font-size: 0.95rem;
+}
+
+.ovz-kaart--demo {
+  background: rgb(232 184 75 / 0.13);
+  border-color: var(--goud-dof);
+}
+
+@media (max-width: 40em) {
+  .ovz-kaarten {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -- visie: editoriaal citaatpaneel met initiaal -- */
+
+.ovz-visie {
+  margin-top: var(--ruimte-4);
+  background: var(--perkament-dof);
+  border-left: 4px solid var(--goud-dof);
+  border-radius: 0 var(--radius-groot) var(--radius-groot) 0;
+  padding: var(--ruimte-4) var(--ruimte-5);
+}
+
+.ovz-visie p {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.ovz-visie p::first-letter {
+  float: left;
+  font-size: 3.1em;
+  line-height: 0.85;
+  padding-right: 0.12em;
+  font-weight: 600;
+  color: var(--rood);
+}
+
+/* -- contact: donkere slotband, echo van de reiszaal -- */
+
+.ovz-contact {
+  margin-top: var(--ruimte-6);
+  background: var(--inkt);
+  color: var(--tekst);
+  border-radius: var(--radius-groot);
+  padding: var(--ruimte-5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ruimte-4);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ovz-contact h2 {
+  margin-top: 0;
+  border-bottom: none;
+  color: var(--goud);
+}
+
+.ovz-contact p {
+  margin-top: var(--ruimte-2);
+}
+
+.ovz-contact a {
+  color: var(--archiefblauw-licht);
+}
+
+.ovz-contact a:hover {
+  color: var(--goud);
+}
+
+.ovz-contact .cv-acties {
+  margin-top: 0;
+}
+
+.knop-licht--licht {
+  color: var(--goud);
+  border-color: var(--goud-dof);
+}
+
+.knop-licht--licht:hover {
+  background: rgb(232 184 75 / 0.12);
+  color: var(--goud);
+}
+
+/* -- scroll-onthulling: alleen actief als JS de klasse zet -- */
+
+.onthul {
+  opacity: 0;
+  translate: 0 14px;
+  transition: opacity 0.6s var(--verloop), translate 0.6s var(--verloop);
+}
+
+.onthul--zichtbaar {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media print {
+  .ovz-contact {
+    background: none;
+    color: var(--inkt);
+    padding: 0;
+  }
+
+  .ovz-kaart {
+    box-shadow: none;
+  }
+
+  .licht-kop {
+    position: static;
+    background: none;
   }
 }
 
